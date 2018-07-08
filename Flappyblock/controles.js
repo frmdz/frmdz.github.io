@@ -5,15 +5,15 @@ let tap = false;
 
 function kdown(e) {
   if (e.keyCode == 32 ) {
-    if (!tap && !gameover){
+    if (!tap && !GAMEOVER){
       tap = true;
       pajaro_1.aletear();
     }
-    if (!start) {
-      start = true;
+    if (!START) {
+      START = true;
     }
   }
-  if (e.keyCode == 13 && gameover) {
+  if (e.keyCode == 13 && GAMEOVER) {
       restart();
   }
 }
