@@ -4,6 +4,7 @@ let context = canvas.getContext("2d");
 
 let GAMEOVER = false;
 let START = false;
+let PUNTOS = 0;
 
 class Tubos {
   constructor() {
@@ -60,8 +61,8 @@ class Pajaro {
     this.velocidad = -4.5  ;
   }
   aletear() {
-      pajaro_1.velocidad = -4.5;
-      pajaro_1.y -= 35;
+    pajaro_1.velocidad = -4.5;
+    pajaro_1.y -= 35;
   }
   dibujar() {
     context.fillStyle = "#ffea00";
@@ -79,7 +80,7 @@ class Pajaro {
 
 function colision() {
   //1er tubo
-  if (pajaro_1.x+pajaro_1.radio >= tubos_1.posx &&  pajaro_1.x-pajaro_1.radio <= tubos_1.posx+tubos_1.ancho) {
+  if (pajaro_1.x+pajaro_1.radio >= tubos_1.posx && pajaro_1.x-pajaro_1.radio <= tubos_1.posx+tubos_1.ancho) {
     if (pajaro_1.y-pajaro_1.radio <= tubos_1.altura || pajaro_1.y+pajaro_1.radio >= tubos_1.altura+tubos_1.espacio) {
       GAMEOVER = true;
     }
@@ -101,26 +102,33 @@ function restart() {
   pajaro_1.restart();
   GAMEOVER = false;
   START = false;
+  PUNTOS = 0;
+}
+
+function pantallas() {
+  if (GAMEOVER) {
+    context.fillStyle = "#fff";
+    context.font = "40px Arial";
+    context.fillText("Game Over",50,canvas.height/3);
+    context.font = "25px Arial";
+    context.fillText("Press Enter to re-start",40,(canvas.height/3)+40);
+  }else if (!START) {
+    context.fillStyle = "#fff";
+    context.font = "25px Arial";
+    context.fillText("Tap Space to fly",pajaro_1.x+25,pajaro_1.y+pajaro_1.radio);
+  }
 }
 
 function Principal() {
   context.clearRect(0,0,canvas.width,canvas.height);
-  if (!START) {
-    //start screen
-  }
-  else if (START && !GAMEOVER) {
-    //game
+  if (!GAMEOVER && START) {
     colision();
-	pajaro_1.dibujar();
-    tubos_1.dibujar();
-	pajaro_1.mover();
+    pajaro_1.mover();
     tubos_1.mover();
   }
-  else if (GAMEOVER) {
-    //gamover screen
-    tubos_1.dibujar();
-    pajaro_1.dibujar();
-  }
+  tubos_1.dibujar();
+  pajaro_1.dibujar();
+  pantallas();
   requestAnimationFrame(Principal);
 }
 
