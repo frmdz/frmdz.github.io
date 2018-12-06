@@ -21,20 +21,18 @@
     let pais = document.getElementById("pais").value;
     let ciudad = document.getElementById("ciudad").value;
     let año = document.getElementById("año").value;
-
     document.getElementById("cita-libro").innerHTML = formatolibro(apellido, nombre, año, titulo, pais, ciudad, editorial);
   }
+	  
   function generarweb () {
     let titulo = document.getElementById("tituloweb").value;
     let url = document.getElementById("url").value;
-
     document.getElementById("cita-web").innerHTML = formatoweb(titulo, url);
   }
 
   function formatoweb(titulo, url) {
     if (titulo.length != 0 && url.length != 0) {
       titulo= titulo[0].toUpperCase()+ titulo.substring(1);
-
       return titulo + ". Recuperado de " +  url + ".";
     }else {
       return "Debes llenar el URL y El Título";
