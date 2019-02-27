@@ -8,6 +8,24 @@
         color: #454545;
         background: #fbfbfb;
         font-family: Sans-serif;
+
+      }
+      .TxtStyle {
+        margin-bottom: .5em;
+        border-color: gray;
+        padding: .7em .5em;
+        border-radius: .25em;
+        width: 25em;
+      }
+      .Bstyle {
+        background-color: #089CBF;
+        margin: .5em;
+        border: none;
+        color: white;
+        padding: .56em 1em;
+        text-align: center;
+        font-size: .9em;
+        border-radius: .25em
       }
     </style>
   </head>
@@ -23,7 +41,7 @@
     let año = document.getElementById("año").value;
     document.getElementById("cita-libro").innerHTML = formatolibro(apellido, nombre, año, titulo, pais, ciudad, editorial);
   }
-	  
+
   function generarweb () {
     let titulo = document.getElementById("tituloweb").value;
     let url = document.getElementById("url").value;
@@ -74,20 +92,20 @@
   <form id="form" onsubmit="return false;">
     <h2>Libros</h2>
     <p id="cita-libro"></p>
-	  <input type="text" id="nombre" placeholder="Nombre del autor"/><br>
-	  <input type="text" id="apellido" placeholder="Apellido del autor"/><br>
-	  <input type="text" id="editorial" placeholder="Editorial"/><br>
-	  <input type="text" id="titulo" placeholder="Título"/><br>
-	  <input type="text" id="pais" placeholder="País"/><br>
-	  <input type="text" id="ciudad" placeholder="Ciudad"/><br>
-	  <input type="text" id="año" placeholder="Año de Publicación"/><br>
-	  <input type="submit" onclick="generarlibro();" /><br>
+	  <input class="TxtStyle" type="text" id="nombre" placeholder="Nombre del autor"/><br>
+	  <input class="TxtStyle" type="text" id="apellido" placeholder="Apellido del autor"/><br>
+	  <input class="TxtStyle" type="text" id="editorial" placeholder="Editorial"/><br>
+	  <input class="TxtStyle" type="text" id="titulo" placeholder="Título"/><br>
+	  <input class="TxtStyle" type="text" id="pais" placeholder="País"/><br>
+	  <input class="TxtStyle" type="text" id="ciudad" placeholder="Ciudad"/><br>
+	  <input class="TxtStyle" type="text" id="año" placeholder="Año de Publicación"/><br>
+	  <input class="Bstyle" type="submit" onclick="generarlibro();" /><br>
 
     <h2>Sitios Web</h2>
     <p id="cita-web"></p>
-      <input type="text" id="tituloweb" placeholder="Titulo"/><br>
-      <input type="text" id="url" placeholder="URL" /><br>
-      <input type="submit" onclick="generarweb();" />
+      <input class="TxtStyle" type="text" id="tituloweb" placeholder="Titulo"/><br>
+      <input class="TxtStyle" type="text" id="url" placeholder="URL" /><br>
+      <input class="Bstyle" type="submit" onclick="generarweb();" />
 
 </form>
 
