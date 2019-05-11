@@ -1,113 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Generador APAr</title>
-    <style>
-      html {
-        text-align: center;
-        color: #454545;
-        background: #fbfbfb;
-        font-family: Sans-serif;
-
-      }
-      .TxtStyle {
-        margin-bottom: .5em;
-        border-color: gray;
-        padding: .7em .5em;
-        border-radius: .25em;
-        width: 25em;
-      }
-      .Bstyle {
-        background-color: #089CBF;
-        margin: .5em;
-        border: none;
-        color: white;
-        padding: .56em 1em;
-        text-align: center;
-        font-size: .9em;
-        border-radius: .25em
-      }
-    </style>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Generador APA</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <script src="./js/script.js"></script>
   </head>
+    
   <body>
-  <script>
-  function generarlibro() {
-    let nombre = document.getElementById("nombre").value;
-    let apellido = document.getElementById("apellido").value;
-    let editorial = document.getElementById("editorial").value;
-    let titulo = document.getElementById("titulo").value;
-    let pais = document.getElementById("pais").value;
-    let ciudad = document.getElementById("ciudad").value;
-    let año = document.getElementById("año").value;
-    document.getElementById("cita-libro").innerHTML = formatolibro(apellido, nombre, año, titulo, pais, ciudad, editorial);
-  }
+      <header>
+          <a id="header-tittle" href="https://github.com/frmdz/Generador-citas-APA">Generador APA</a>
+      </header>
 
-  function generarweb () {
-    let titulo = document.getElementById("tituloweb").value;
-    let url = document.getElementById("url").value;
-    document.getElementById("cita-web").innerHTML = formatoweb(titulo, url);
-  }
-
-  function formatoweb(titulo, url) {
-    if (titulo.length != 0 && url.length != 0) {
-      titulo= titulo[0].toUpperCase()+ titulo.substring(1);
-      return titulo + ". Recuperado de " +  url + ".";
-    }else {
-      return "Debes llenar el URL y El Título";
-    }
-  }
-
-  function formatolibro( apellido, nombre, año, titulo, pais, ciudad, editorial) {
-    if (apellido.length != 0) {
-      apellido= apellido[0].toUpperCase()+ apellido.substring(1)+", ";
-    }
-    if (nombre.length != 0) {
-      nombre= nombre[0].toUpperCase()+". ";
-    }
-    if (año.length != 0) {
-      año = "("+año+"). ";
-    }
-    if (titulo.length != 0) {
-      titulo = titulo[0].toUpperCase()+ titulo.substring(1)+". ";
-    }
-    if (pais.length != 0) {
-      pais = pais[0].toUpperCase()+ pais.substring(1);
-      if (ciudad.length != 0) {
-        pais = pais+", ";
-        ciudad = ciudad[0].toUpperCase()+ ciudad.substring(1)+": ";
-      }else {
-        pais = pais+": ";
-      }
-    }
-    if (editorial.length != 0) {
-      editorial= editorial[0].toUpperCase()+ editorial.substring(1)+".";
-    }
-    return apellido+nombre+año+titulo+pais+ciudad+editorial;
-  }
-  </script>
-
-
-  <h1>Generador APA</h1>
-
-  <form id="form" onsubmit="return false;">
-    <h2>Libros</h2>
-    <p id="cita-libro"></p>
-	  <input class="TxtStyle" type="text" id="nombre" placeholder="Nombre del autor"/><br>
-	  <input class="TxtStyle" type="text" id="apellido" placeholder="Apellido del autor"/><br>
-	  <input class="TxtStyle" type="text" id="editorial" placeholder="Editorial"/><br>
-	  <input class="TxtStyle" type="text" id="titulo" placeholder="Título"/><br>
-	  <input class="TxtStyle" type="text" id="pais" placeholder="País"/><br>
-	  <input class="TxtStyle" type="text" id="ciudad" placeholder="Ciudad"/><br>
-	  <input class="TxtStyle" type="text" id="año" placeholder="Año de Publicación"/><br>
-	  <input class="Bstyle" type="submit" onclick="generarlibro();" /><br>
-
-    <h2>Sitios Web</h2>
-    <p id="cita-web"></p>
-      <input class="TxtStyle" type="text" id="tituloweb" placeholder="Titulo"/><br>
-      <input class="TxtStyle" type="text" id="url" placeholder="URL" /><br>
-      <input class="Bstyle" type="submit" onclick="generarweb();" />
-
-</form>
-
+    <main class="content">   
+      <form class="sheet" onsubmit="return false;">
+        <h2 class="form-tittle">Libros</h2> 
+        <div class="form">
+          <p id="cita-libro"></p>
+          <input class="text-style" type="text" id="nombre" placeholder="Nombre del autor"/><br>
+          <input class="text-style" type="text" id="apellido" placeholder="Apellido del autor"/><br>
+          <input class="text-style" type="text" id="editorial" placeholder="Editorial"/><br>
+          <input class="text-style" type="text" id="titulo" placeholder="Título"/><br>
+          <input class="text-style" type="text" id="pais" placeholder="País"/><br>
+          <input class="text-style" type="text" id="ciudad" placeholder="Ciudad"/><br>
+          <input class="text-style" type="number" id="año" placeholder="Año de Publicación"/><br>
+          <input class="button-style" type="submit" onclick="generarlibro();" /><br>
+        </div>
+      </form>
+  
+      <form class="sheet" id="form" onsubmit="return false;">
+        <h2 class="form-tittle">Sitios Web</h2>
+        <div class="form">
+          <p id="cita-web"></p>
+          <input class="text-style" type="text" id="tituloweb" placeholder="Titulo"/><br>
+          <input class="text-style" type="url" id="url" placeholder="URL" /><br>
+          <input class="button-style" type="submit" onclick="generarweb();" />
+        </div>
+      </form>
+  </main>
   </body>
 </html>
