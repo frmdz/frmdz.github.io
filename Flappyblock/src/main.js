@@ -23,11 +23,10 @@ function kdown(e) {
     }
   }
   if (e.keyCode == 13 && GAMEOVER) {
-      restart();
+    restart();
   }
 }
 
-//"Intro"
 function kup(e) {
   if (e.keyCode == 32 ) {
     TAP = false;
@@ -36,26 +35,14 @@ function kup(e) {
 
 //Detect Collision
 function colision() {
-  //TODO: Re-implement this.
-  //1st group pipes
-  if (pajaro_1.x+pajaro_1.radio >= tubos_1.posx && pajaro_1.x-pajaro_1.radio <= tubos_1.posx+tubos_1.ancho) {
-    if (pajaro_1.y-pajaro_1.radio <= tubos_1.altura || pajaro_1.y+pajaro_1.radio >= tubos_1.altura+tubos_1.espacio) {
-      GAMEOVER = true;
-    }
-  }
-  //2nd group of pipes
-  if (pajaro_1.x+pajaro_1.radio >= tubos_1.posx_2 &&  pajaro_1.x-pajaro_1.radio <= tubos_1.posx_2+tubos_1.ancho) {
-    if (pajaro_1.y-pajaro_1.radio <= tubos_1.altura_2 || pajaro_1.y+pajaro_1.radio >= tubos_1.altura_2+tubos_1.espacio_2) {
-      GAMEOVER = true;
-    }
-  }
-  //Falling
-  if (pajaro_1.y+pajaro_1.radio >= canvas.height) {
-    GAMEOVER = true;
-  }
+  const helper = (p_x, p_y, p_r, t_x, t_w, t_h, t_e) => (p_x+p_r >= t_x && p_x-p_r <= t_x+t_w) && (p_y-p_r <= t_h+t_e || p_y+p_r >= t_h)
+
+  GAMEOVER = (pajaro_1.y+pajaro_1.radio >= canvas.height)
+            || helper(pajaro_1.x, pajaro_1.y, pajaro_1.radio, tubos_1.posx, tubos_1.ancho, tubos_1.altura, tubos_1.espacio)
+            || helper(pajaro_1.x, pajaro_1.y, pajaro_1.radio, tubos_1.posx_2, tubos_1.ancho, tubos_1.altura_2, tubos_1.espacio_2)
 }
 
-//Restart the game.
+//Restart game
 function restart() {
   tubos_1.restart();
   pajaro_1.restart();
@@ -63,7 +50,7 @@ function restart() {
   START = false;
 }
 
-//Draw the screens.
+//Draw screens.
 function pantallas() {
   if (GAMEOVER) {
     context.fillStyle = "#fff";
@@ -82,10 +69,8 @@ let pajaro_1 = new Pajaro();
 let tubos_1 = new Tubos();
 
 //Main loop
-function Principal() {
-  //Clear the screen.
-  context.clearRect(0,0,canvas.width,canvas.height);
-
+function Principal() {  
+  context.clearRect(0,0,canvas.width,canvas.height);//Clear the screen.
   if (!GAMEOVER && START) {
     colision();
     pajaro_1.mover();
@@ -94,6 +79,5 @@ function Principal() {
   tubos_1.dibujar();
   pajaro_1.dibujar();
   pantallas();
-  //Loop.
-  requestAnimationFrame(Principal);
+  requestAnimationFrame(Principal);//Loop.
 } Principal();

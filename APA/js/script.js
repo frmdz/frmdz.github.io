@@ -3,15 +3,8 @@ function generarweb () {
   let titulo = document.getElementById("tituloweb").value;
   let url = document.getElementById("url").value;
 
-  //check if the strings are not empty and generates the citation.
-  if (titulo.length && url.length) {
-    document.getElementById("cita-web").innerHTML = `${titulo.charAt(0).toUpperCase() + titulo.slice(1)}. Recuperado de ${url}.`;
-  } else{
-    document.getElementById("cita-web").innerHTML = "Debes llenar el URL y El Título";
-  }    
-
+  document.getElementById("cita-web").innerHTML  = (titulo.length && url.length) ? `${titulo.charAt(0).toUpperCase() + titulo.slice(1)}. Recuperado de ${url}.` : "Debes llenar el URL y El Título";  
 }
-
 
 function generarlibro() {
   //save the inputs.
@@ -23,20 +16,13 @@ function generarlibro() {
       ciudad = document.getElementById("ciudad").value,
       año = document.getElementById("año").value;
     
-    //check if the strings are not empty and generates the citation.
-    //TODO: i think there's a better way to implement this, there's a lot of if statements.
-    if (apellido.length) {
-      apellido = apellido.charAt().toUpperCase() + apellido.slice(1) + ", ";
-    }
-    if (nombre.length) {
-      nombre = nombre.charAt().toUpperCase() + ". ";
-    }
-    if (año.length) {
-      año = "(" + año + "). ";
-    }
-    if (titulo.length) {
-      titulo = titulo.charAt().toUpperCase() + titulo.slice(1) + ". ";
-    }
+    //formatting
+    apellido = (apellido.length) ? `${apellido.charAt().toUpperCase() + apellido.slice(1)}, ` : "";
+    nombre = (nombre.length) ?  `${nombre.charAt().toUpperCase()}. ` : "";
+    año = (año.length) ? `(${año}). ` : "";
+    titulo = (titulo.length) ? `${titulo.charAt().toUpperCase() + titulo.slice(1)}. ` : "";
+    editorial = (editorial.length) ? `${editorial.charAt().toUpperCase() + editorial.slice(1)}.` : ""
+
     if (pais.length) {
       pais = pais.charAt().toUpperCase() + pais.slice(1);
       if (ciudad.length != 0) {
@@ -46,9 +32,6 @@ function generarlibro() {
         pais = pais + ": ";
       }
     }
-    if (editorial.length) {
-      editorial = editorial.charAt().toUpperCase() + editorial.slice(1) + ".";
-    }
-
+    
     document.getElementById("cita-libro").innerHTML = apellido + nombre + año + titulo + pais + ciudad + editorial;
   }
