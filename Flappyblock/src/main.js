@@ -35,8 +35,7 @@ function kup(e) {
 
 //Detect Collision
 function colision() {
-  const helper = (p_x, p_y, p_r, t_x, t_w, t_h, t_e) => (p_x+p_r >= t_x && p_x-p_r <= t_x+t_w) && (p_y-p_r <= t_h+t_e || p_y+p_r >= t_h)
-
+  const helper = (p_x, p_y, p_r, t_x, t_w, t_h, t_e) => (p_x+p_r >= t_x && p_x-p_r <= t_x+t_w) && (p_y-p_r <= t_h || p_y+p_r >= t_h+t_e)
   GAMEOVER = (pajaro_1.y+pajaro_1.radio >= canvas.height)
             || helper(pajaro_1.x, pajaro_1.y, pajaro_1.radio, tubos_1.posx, tubos_1.ancho, tubos_1.altura, tubos_1.espacio)
             || helper(pajaro_1.x, pajaro_1.y, pajaro_1.radio, tubos_1.posx_2, tubos_1.ancho, tubos_1.altura_2, tubos_1.espacio_2)
