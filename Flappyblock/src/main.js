@@ -1,5 +1,5 @@
 import Pajaro from './Pajaro.js';
-import Tubos from './Tubos.js';
+import Tubo from './Tubo.js';
 
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext("2d");
@@ -33,17 +33,10 @@ function kup(e) {
   }
 }
 
-//Detect Collision
-function colision() {
-  const helper = (p_x, p_y, p_r, t_x, t_w, t_h, t_e) => (p_x+p_r >= t_x && p_x-p_r <= t_x+t_w) && (p_y-p_r <= t_h || p_y+p_r >= t_h+t_e)
-  GAMEOVER = (pajaro_1.y+pajaro_1.radio >= canvas.height)
-            || helper(pajaro_1.x, pajaro_1.y, pajaro_1.radio, tubos_1.posx, tubos_1.ancho, tubos_1.altura, tubos_1.espacio)
-            || helper(pajaro_1.x, pajaro_1.y, pajaro_1.radio, tubos_1.posx_2, tubos_1.ancho, tubos_1.altura_2, tubos_1.espacio_2)
-}
-
 //Restart game
 function restart() {
-  tubos_1.restart();
+  tubo_1.restart();
+  tubo_2.restart();
   pajaro_1.restart();
   GAMEOVER = false;
   START = false;
@@ -65,17 +58,22 @@ function pantallas() {
 }
 
 let pajaro_1 = new Pajaro();
-let tubos_1 = new Tubos();
+let tubo_1 = new Tubo(canvas.width);
+let tubo_2 = new Tubo(canvas.width + 200);
 
 //Main loop
 function Principal() {  
   context.clearRect(0,0,canvas.width,canvas.height);//Clear the screen.
   if (!GAMEOVER && START) {
-    colision();
     pajaro_1.mover();
-    tubos_1.mover();
+    tubo_1.mover(tubo_2.x);
+    tubo_2.mover(tubo_1.x);
+    GAMEOVER = pajaro_1.detectarcaida()
+            || pajaro_1.detectarcolision(tubo_1)
+            || pajaro_1.detectarcolision(tubo_2);
   }
-  tubos_1.dibujar();
+  tubo_1.dibujar();
+  tubo_2.dibujar();
   pajaro_1.dibujar();
   pantallas();
   requestAnimationFrame(Principal);//Loop.

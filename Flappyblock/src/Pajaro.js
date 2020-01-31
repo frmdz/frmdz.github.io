@@ -31,6 +31,15 @@ export default class Pajaro {//Bird
     this.y = canvas.width / 3;
     this.velocidad = -4.5;
   }
+
+  detectarcolision(tubo){
+    return (this.x+this.radio > tubo.x && this.x-this.radio < tubo.x+tubo.width) &&
+            (this.y-this.radio < tubo.height || this.y+this.radio > tubo.height+tubo.space);
+  }
+
+  detectarcaida(){
+    return this.y+this.radio >= canvas.height;
+  }
 }
 
 
