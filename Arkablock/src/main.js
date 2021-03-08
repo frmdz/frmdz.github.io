@@ -26,6 +26,10 @@ function kup (e) {
   if (e.keyCode == 37) {
     raqueta.lkey = false;
   }
+  //easter egg
+  if (e.keyCode == 51){
+    NIVEL = 3;
+  }
 }
 
 function kdown (e) {
